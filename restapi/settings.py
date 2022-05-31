@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',   # 追加
     'rest_framework',               # 追加
     'api.apps.ApiConfig',           # 追加
+    'corsheaders',                  # 追加
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',     # 追加
+    'corsheaders.middleware.CorsMiddleware',     # 追加: 配列の先頭から順番に呼ばれるため、corsheadersは先頭に追加。
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +51,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+# 追加: フロント側からのアクセスを許可するURL
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://localhost:3001'
 ]
 
 ROOT_URLCONF = 'restapi.urls'
@@ -108,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
